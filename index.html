@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>JQuery Detecting Features With jQuery Support</title>
+
+</head>
+<body>
+<p><a id="first-link" href="#">Fist link</a></p>
+<p><a href="https://www.google.com">Second Link</a></p>
+<p><a href="#">Third Link</a></p>
+
+<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<script type="text/Javascript">
+(function($) {
+  $(document).ready(function() {
+    $('a')
+      .filter(function() {
+        var href= $(this).attr('href');
+        // Normalize the URL
+        if ( !jQuery.support.hrefNormalized ) {
+          var loc = window.location;
+          href = href.replace( loc.protocol + '//' + loc.host + loc.pathname, '');
+        }
+        // This anchor tag is of the form >a href="#hash">
+        return ( href.substr(0,1) == '#');
+      })
+      .click(function() {
+        // Special click handler code
+      });
+  });
+})(jQuery);
+
+</script>
+</body>
+</html>
